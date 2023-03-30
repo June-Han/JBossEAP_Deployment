@@ -48,6 +48,11 @@
     regexp: "LoadModule proxy_balancer_module modules/mod_proxy_balancer.so"
     line: "#LoadModule proxy_balancer_module modules/mod_proxy_balancer.so"
 
+- name: Ensure Correct index.html is present
+  ansible.builtin.copy:
+    src: files/index.html
+    dest: /var/www/html/index.html
+
 - name: Enable httpd
   service:
     name: httpd
