@@ -1,9 +1,9 @@
 [webservers]
-apache ansible_host=192.168.124.86
+apache ansible_host=192.168.124.86 ansible_connection=ssh
 
 [appservers]
-eap1 ansible_host=192.168.124.171
-eap2 ansible_host=192.168.124.160
+eap1 ansible_host=192.168.124.171 ansible_connection=ssh
+eap2 ansible_host=192.168.124.160 ansible_connection=ssh
 
 [databank]
-eapdb ansible_host=192.168.124.47
+eapdb ansible_host=192.168.124.47 ansible_connection=ssh
