@@ -1,2 +1,9 @@
 [webservers]
 apache ansible_host=192.168.124.86
+
+[appservers]
+eap1 ansible_host=192.168.124.171
+eap2 ansible_host=192.168.124.160
+
+[databank]
+eapdb ansible_host=192.168.124.47
