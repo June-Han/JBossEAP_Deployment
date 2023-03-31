@@ -36,12 +36,22 @@
     state: absent
     path: "{{ eap_home }}/"
 
+- name: "Obtains JBoss repository"
+  get_url:
+    url: "{{ eap_link }}"
+    dest: "{{ eap_deploy_dir }}"
+
 - name: Unarchive EAP
   unarchive:
-    src:  "{{ eap_archive }}"
+    src:  "{{ eap_deploy_dir }}/{{ eap_archive }}"
     dest: "{{ eap_deploy_dir }}"
     owner: "{{ jboss_eap_user }}"
     group: "{{ jboss_eap_group }}"
+
+- name: Clear JBoss Zip File
+  file:
+    state: absent
+    path: "{{ eap_deploy_dir }}/{{ eap_archive }}"
 
 - name: Create symlink
   file:
