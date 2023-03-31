@@ -36,11 +36,6 @@
     state: absent
     path: "{{ eap_home }}/"
 
-- name: Clear JBoss Zip File (if any)
-  file:
-    state: absent
-    path: "{{ eap_deploy_dir }}/{{ eap_archive }}"
-
 - name: "Obtains JBoss repository"
   get_url:
     url: "{{ eap_link }}"
