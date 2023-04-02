@@ -97,3 +97,18 @@
   service:
     name: jboss-eap-rhel
     state: started
+
+- name: Create Admin Users juhan on each application
+  command: "sh {{ eap_home }}/bin/add-user.sh juhan password"
+
+- name: Ensures webapp War file has been retrieved from the url
+  get_url:
+    url: "{{ app_url }}"
+    dest: " {{ eap_deploy_dir }}"
+
+- name: Deploy the war file on each standalone server
+  command: "{{ item }}"
+  with_items:
+    - sh {{ eap_home }}/bin/jboss-cli.sh
+    - connect
+    - deploy {{ eap_deploy_dir }}/{{ app_name }}
