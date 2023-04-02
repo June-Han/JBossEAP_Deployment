@@ -104,7 +104,7 @@
 - name: Ensures webapp War file has been retrieved from the url
   get_url:
     url: "{{ app_url }}"
-    dest: " {{ eap_deploy_dir }}/"
+    dest: "{{ eap_deploy_dir }}"
 
 - name: Deploy the war file on each standalone server
   command: "{{ item }}"
