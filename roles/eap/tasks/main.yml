@@ -34,7 +34,7 @@
 - name: Clean EAP directory
   file:
     state: absent
-    path: "{{ eap_home }}/"
+    path: "{{ eap_all }}"
 
 - name: "Obtains JBoss repository"
   get_url:
@@ -107,8 +107,9 @@
     dest: "{{ eap_deploy_dir }}"
 
 - name: Deploy the war file on each standalone server
-  command: "{{ item }}"
-  with_items:
-    - sh {{ eap_home }}/bin/jboss-cli.sh
-    - connect
-    - deploy {{ eap_deploy_dir }}/{{ app_name }}
+  command: "sh {{ eap_home }}/bin/jboss-cli.sh -u=juhan -p=password --controller=localhost:9990 --connect --command='deploy {{ eap_deploy_dir }}/{{ app_name }} --force'"
+
+- name: Clear JBoss Zip File
+  file:
+    state: absent
+    dest: "{{ eap_deploy_dir }}/{{ app_name }}"
