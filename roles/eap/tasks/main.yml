@@ -34,6 +34,11 @@
 - name: Clean EAP directory
   file:
     state: absent
+    path: "{{ eap_home }}"
+
+- name: Remove EAP directories (for different versions)
+  file:
+    state: absent
     path: "{{ eap_all }}"
 
 - name: "Obtains JBoss repository"
@@ -106,7 +111,7 @@
     url: "{{ app_url }}"
     dest: "{{ eap_deploy_dir }}"
 
-- name: Deploy the war file on each standalone server
+- name: Deploy the war file on each standalone server (replace if deployed)
   command: "sh {{ eap_home }}/bin/jboss-cli.sh -u=juhan -p=password --controller=localhost:9990 --connect --command='deploy {{ eap_deploy_dir }}/{{ app_name }} --force'"
 
 - name: Clear JBoss Zip File
