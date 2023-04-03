@@ -1,6 +1,9 @@
 ---
 - name: Configure Apache Web Server
   hosts: webservers
+  collections:
+    - community.general
+    - ansible.posix
   roles:
     - apache
 
